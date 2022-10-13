@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ShoppingListApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Kerekes István, Bajai SZC Türr István Gimnázium - 2/14.SZFT 2022/2023"> 
+        <meta name="description" content="Bevásárló lista készítése AngularJS használatával">
+        <meta name="Keywords" content="Bevásárló lista, Shopping list, AngularJS example">
+        <title>Shopping list app</title>
+        <!--BootStrap CSS-->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+        <!--My Stylesheet-->
+        <link rel="stylesheet" href="css/style.css">
+
+    </head>
+    <body>
+
+        <div class="container" ng-controller="mainCtrl">
+
+            <header>
+                <h1>{{ title }}</h1>
+            </header>
+                
+            <main>
+
+                <!--Add Product to the list-->
+                <section>
+                    <form action="">
+
+                        <h5>New Product: </h5>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Product: </label>
+                            <input type="text" class="form-control" id="Product" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Quantity">Quantity</label>
+                            <input type="number" class="form-control" id="Quantity">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Price">Price</label>
+                            <input type="number" class="form-control" id="Price">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Product to the list</button>
+                        
+                    </form>
+                </section>
+                <hr>
+                    <!--View and Remove-->
+                <section>
+                    <h5>View and/or Remove</h5>
+                    div class="input-group flex-nowrap pb-2">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="keresés..." ng-model="searchField">
+                </div>
+
+                <p ng-if="adatok.length == 0" class="text-muted">Jelenleg még nincs bejegyzés a telefonkönyvben!</p>
+
+                <div ng-repeat="kategoria in kategoriak" ng-if="adatok.length>0">
+                    <h6>{{ category in categories }}</h6>
+                    <ul>
+                        <li ng-repeat="data in filtered = ( data | filter:searchField)" 
+                        ng-if="data.category == $parent.category">{{ data. }} - <span><a href="">{{ adat.telszam }}</a>
+                        </span> <i class="bi bi-trash-fill" ng-click="torles(adat.ID)"></i> </li>
+                    </ul>
+                </div>
+                <p>Price of all: {{ adatok.length }}.</p>
+
+                </section>
+
+            </main>
+
+            <footer>
+                <h4>{{ company }} - {{author}}</h4>
+            </footer>
+            
+        </div>
+
+
+
+        
+
+        <!--JQuery-->
+        <script src="JQuery/jquery-3.6.1.min.js"></script>
+
+        <!--BootStrap JS-->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!--AngularJS-->
+        <script src="AngularJS/angular.min.js"></script>
+
+        <!--My Script-->
+        <script src="js/script.js"></script>
+
+    </body>
+</html>

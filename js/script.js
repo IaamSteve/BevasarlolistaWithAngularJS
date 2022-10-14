@@ -6,17 +6,22 @@ app.controller('mainCtrl', function($scope){
     $scope.author = '2/14.szft Szoftverfejlesztő'
     $scope.categories = ['Food', 'Health&Beauty', 'Household', 'Other']
     $scope.newData = {}
+    $scope.fullPrice = 0;
 
     $scope.data = angular.fromJson(window.localStorage.getItem('shoppinglist'))
     if($scope.data == null){
         $scope.data = []
     }
 
-    $scope.hozzadas = function( {
-        if ($scope.newData) {
-            
+    $scope.adding = function() {
+        if($scope.newData.Product == null || $scope.newData.Quantity == null || $scope.newData.Price == null ) {
+            $scope.message = "You didn't clarify everything..."
+            $scope.Sum = function(){
+                for(let i = 0; i < $scope.newData.length; i++){
+                    $scope.fullPrice += $scope.newData[i].Price;
+                }
+            }
         }
-    })
-
-
+    }
+    
 })

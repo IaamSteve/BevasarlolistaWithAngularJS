@@ -16,17 +16,22 @@ app.controller('mainCtrl', function($scope){
     $scope.adding = function() {
         if($scope.newData.Product == null || $scope.newData.Quantity == null || $scope.newData.Price == null ) {
             $scope.message = "You didn't clarify everything..."
+            
+        }else{
+            $scope.data.push({ ID: $scope.newData.length + 1, Product: $scope.newData.Product, Quantity: $scope.newData.Quantity, Price: $scope.newData.Price});
+            window.localStorage.setItem('shoppinglist', angular.toJson($scope.newData));
             $scope.Sum = function(){
                 for(let i = 0; i < $scope.newData.length; i++){
                     $scope.fullPrice += $scope.newData[i].Price;
                 }
             }
+            $scope.newData = {};
         }
     }
     $scope.delete = function(ID) {
-        let idx = $scope.data.findIndex(item => item.ID == ID);
+        let idx = $scope.newData.findIndex(item => item.ID == ID);
         $scope.data.splice(idx, 1);
-        window.localStorage.setItem('telefonkonyv', angular.toJson($scope.data));
+        window.localStorage.setItem('shoppinglist', angular.toJson($scope.newData));
     }
     
 })

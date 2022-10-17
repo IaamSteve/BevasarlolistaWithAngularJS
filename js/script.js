@@ -23,5 +23,10 @@ app.controller('mainCtrl', function($scope){
             }
         }
     }
+    $scope.delete = function(ID) {
+        let idx = $scope.data.findIndex(item => item.ID == ID);
+        $scope.data.splice(idx, 1);
+        window.localStorage.setItem('telefonkonyv', angular.toJson($scope.data));
+    }
     
 })

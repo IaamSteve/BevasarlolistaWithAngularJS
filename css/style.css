@@ -1,10 +1,12 @@
+
 body{
-    background-color: silver;
+    background-color: darkgray;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 .container{
     background-color: white;
     box-shadow: 0 0 10px gray;
-
 }
 
 header{

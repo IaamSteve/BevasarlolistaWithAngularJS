@@ -41,25 +41,24 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Product: </label>
-                            <input type="text" class="form-control" id="Product" size="25" ng-model="newData.Product">
+                            <input type="text" class="form-control" id="Product" ng-model="newData.Product">
                         </div>
 
                         <div class="form-group">
                             <label for="Quantity">Quantity</label>
-                            <input type="number" class="form-control" id="Quantity" size="25" ng-model="newData.Quantity">
+                            <input type="number" class="form-control" id="Quantity" ng-model="newData.Quantity">
                         </div>
 
                         <div class="form-group">
                             <label for="Price">Price</label>
-                            <input type="number" class="form-control" id="Price" size="25" ng-model="newData.Price">
+                            <input type="number" class="form-control" id="Price" ng-model="newData.Price">
                         </div>
 
-                        <button type="submit" class="btn btn-primary mt-1 mb-1" onclick="adding()" ng-click="adding()">Add Product to the list</button>
+                        <button type="submit" class="btn btn-primary mt-1 mb-1" ng-click="adding()">Add Product to the list.</button>
                         
                     </form>
                 </section>
                 <hr>
-
                     <!--View and Remove-->
                 <section>
                     <h5>Search and Destroy</h5>
@@ -67,23 +66,30 @@
                     <span class="input-group-text" id="addon-wrapping">
                         <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="Search..." size="25" ng-model="searchField">
+                    <input type="text" class="form-control" placeholder="Search..." ng-model="searchField">
                 </div>
 
                 <p ng-if="data.length == 0" class="text-muted">There's nothing in the shopping list yet.</p>
 
-                <div ng-repeat="category in categorie" ng-if="adatok.length > 0">
-                    <h6>{{ category in categories }}</h6>
+
+                <!--Valahol itt a divben van a bibi-->
+                <div ng-repeat="category in categories" ng-if="data.length > 0">
+                    <h6>{{ category }}</h6>
                     <ul>
-                        <li ng-repeat="newData in filtered = ( newData | filter:searchField)" 
-                        ng-if="newData.category == $parent.category">{{ newData.categories }} - <span><a href="">{{ newData.Price }}</a>
-                        </span> <i class="bi bi-trash-fill" ng-click="delete(newData.ID)"></i> </li>
+                        <li ng-repeat="dataBit in filtered = ( data | filter:searchField)" ng-if="dataBit.category == $parent.category">{{ dataBit.Product }} - 
+                        <span>
+                            <a href="">{{ dataBit.Quantity }}</a>
+                        </span> <span>
+                            <a href="">{{ dataBit.Price }}</a>
+                        </span> <i class="bi bi-trash-fill" ng-click="delete(dataBit.ID)"></i> </li>
                     </ul>
                 </div>
 
-                <label for="Sum">The full price of all the items in the cart currently: </label>
-                <input type="text" class="form-control" ng-model="Sum" id="Sum" size="25" readonly>
 
+                
+                <label for="Sum">The full price of all the items in the cart currently: </label>
+                <input type="text" class="form-control" ng-model="Sum" value="{{ data.length }}." id="Sum" readonly>
+                <p>In the shopping list there are {{ data.length }} Product listed</p>
                 </section>
 
             </main>

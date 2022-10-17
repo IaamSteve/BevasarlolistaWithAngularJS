@@ -13,6 +13,8 @@ app.controller('mainCtrl', function($scope){
         $scope.data = []
     }
 
+
+    //Ha nem a html-ben, akkor itt
     $scope.adding = function() {
         if($scope.newData.Product == null || $scope.newData.Quantity == null || $scope.newData.Price == null ) {
             $scope.message = "You didn't clarify everything..."
@@ -20,6 +22,7 @@ app.controller('mainCtrl', function($scope){
         }else{
             $scope.data.push({ ID: $scope.newData.length + 1, Product: $scope.newData.Product, Quantity: $scope.newData.Quantity, Price: $scope.newData.Price});
             window.localStorage.setItem('shoppinglist', angular.toJson($scope.newData));
+            console.log(newData.length);
             $scope.Sum = function(){
                 for(let i = 0; i < $scope.newData.length; i++){
                     $scope.fullPrice += $scope.newData[i].Price;
@@ -28,6 +31,9 @@ app.controller('mainCtrl', function($scope){
             $scope.newData = {};
         }
     }
+
+
+
     $scope.delete = function(ID) {
         let idx = $scope.newData.findIndex(item => item.ID == ID);
         $scope.data.splice(idx, 1);

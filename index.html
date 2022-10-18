@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ShoppingListApp">
+<html lang="en" ng-app="shopListApp">
     <head>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Kerekes István, Bajai SZC Türr István Gimnázium - 2/14.SZFT 2022/2023"> 
         <meta name="description" content="Bevásárló lista készítése AngularJS használatával">
         <meta name="Keywords" content="Bevásárló lista, Shopping list, AngularJS example">
+
         <title>Shopping list app</title>
+
         <!--BootStrap CSS-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -26,16 +29,16 @@
             </header>
                 
             <main>
-
+                <form action="">
                 <!--Add Product to the list-->
-                <section>
+                    <section>
 
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" ng-show="message != null">
                             {{ message }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
 
-                    <form action="">
+                    
 
                         <h5>New Product: </h5>
 
@@ -55,51 +58,50 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="Category">Category</label>
-                            <select id="Category" class="form-select" ng-model="newData.category">
-                                <option value="">Please choose one of the categories from below.</option>
-                                <option value="{{ category }}" ng-repeat="category in categories">{{ category }}</option>
+                            <select id="Category" class="form-select" ng-model="newdata.category">
+                                <option value="">Category...</option>
+                                <option value="{{ category }}" ng-repeat="category in categories">{{ category }}</option>    
                             </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-1 mb-1" ng-click="adding()">Add Product to the list.</button>
+                            
                         
+                        </section>
+                        <hr>
+                            <!--View and Remove-->
+                        <section>
+                            <h5>Search and Destroy</h5>
+                            <div class="input-group flex-nowrap pb-2">
+                            <span class="input-group-text" id="addon-wrapping">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Search..." ng-model="searchField">
+                        </div>
+
+                        <p ng-if="data.length == 0" class="text-muted">There's nothing in the shopping list yet.</p>
+
+
+                        <!--Valahol itt a divben van a bibi-->
+                        <div ng-repeat="category in categories" ng-if="data.length > 0">
+                            <h6>{{ category }}</h6>
+                            <ul>
+                                <li ng-repeat="dataBit in filtered = ( data | filter:searchField)" ng-if="dataBit.category == $parent.category">{{ dataBit.Product }} - 
+                                <span>
+                                    <a href="">{{ dataBit.Quantity }}</a>
+                                </span> <span>
+                                    <a href="">{{ dataBit.Price }}</a>
+                                </span> <i class="bi bi-trash-fill" ng-click="delete(dataBit.ID)"></i> </li>
+                            </ul>
+                        </div>
+
+
+
+                        <label for="Sum">The full price of all the items in the cart currently: </label>
+                        <input type="text" class="form-control" ng-model="Sum" value="{{ data.length }}." id="Sum" readonly>
+                        <p>In the shopping list there are {{ data.length }} Product listed</p>
+                        </section>
                     </form>
-                </section>
-                <hr>
-                    <!--View and Remove-->
-                <section>
-                    <h5>Search and Destroy</h5>
-                    <div class="input-group flex-nowrap pb-2">
-                    <span class="input-group-text" id="addon-wrapping">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Search..." ng-model="searchField">
-                </div>
-
-                <p ng-if="data.length == 0" class="text-muted">There's nothing in the shopping list yet.</p>
-
-
-                <!--Valahol itt a divben van a bibi-->
-                <div ng-repeat="category in categories" ng-if="data.length > 0">
-                    <h6>{{ category }}</h6>
-                    <ul>
-                        <li ng-repeat="dataBit in filtered = ( data | filter:searchField)" ng-if="dataBit.category == $parent.category">{{ dataBit.Product }} - 
-                        <span>
-                            <a href="">{{ dataBit.Quantity }}</a>
-                        </span> <span>
-                            <a href="">{{ dataBit.Price }}</a>
-                        </span> <i class="bi bi-trash-fill" ng-click="delete(dataBit.ID)"></i> </li>
-                    </ul>
-                </div>
-
-
-                
-                <label for="Sum">The full price of all the items in the cart currently: </label>
-                <input type="text" class="form-control" ng-model="Sum" value="{{ data.length }}." id="Sum" readonly>
-                <p>In the shopping list there are {{ data.length }} Product listed</p>
-                </section>
-
             </main>
 
             <footer>
